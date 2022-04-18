@@ -2,12 +2,22 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$|jsx/,
+        test: /\.js$|\.jsx$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
-      }
-    ]
-  }
+        enforce: "pre",
+        use: ["babel-loader", "source-map-loader"],
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        resolve: {
+          extensions: ["*", ".js", ".jsx", ".json", ".css"],
+          symlinks: false,
+          cacheWithContext: false,
+        },
+      },
+    ],
+  },
 };

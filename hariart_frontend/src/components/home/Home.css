@@ -1,0 +1,13 @@
+body {
+  background: url(http://hariart.org/wp-content/themes/storefront-child/images/background.jpg);
+  background-size: cover;
+  min-height: calc(100vh - 90px);
+  background-position: center 0%;
+}
+
+.bottom-text {
+  font-size: 42px;
+  position: absolute;
+  bottom: 40px;
+  right: 5.5%;
+}
