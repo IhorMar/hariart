@@ -2,7 +2,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$|\.jsx$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         enforce: "pre",
         use: ["babel-loader", "source-map-loader"],
@@ -10,6 +10,17 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: false,
+            },
+          },
+        ],
       },
       {
         resolve: {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./Navbar.css";
+import logo from "../../../templates/frontend/images/logo.png"
 
 export default function Navbar() {
   const [showSubMenu, setSubMenu] = useState(false);
@@ -10,7 +11,7 @@ export default function Navbar() {
       <NavLink to="/">
         <img
           className="navbar__logo"
-          src="http://hariart.org/wp-content/uploads/2020/02/Group-136.png"
+          src={logo}
           alt="Hariart"
         />
       </NavLink>

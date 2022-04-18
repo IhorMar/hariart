@@ -1,5 +1,5 @@
 body {
-  background: url(http://hariart.org/wp-content/themes/storefront-child/images/background.jpg);
+  background: url(//hariart_frontend/templates/frontend/images/background.jpg);
   background-size: cover;
   min-height: calc(100vh - 90px);
   background-position: center 0%;
