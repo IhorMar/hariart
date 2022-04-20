@@ -9,5 +9,5 @@ export default function Home() {
     };
   }, []);
 
-  return <div>Beautiful Spiritual Canvas</div>;
+  return <div className="bottom-text">Beautiful Spiritual Canvas</div>;
 }
