@@ -270,3 +270,4 @@ yarn-error.log*
 .idea
 /htmlcov
 htmlcov
+hariart/migrations
