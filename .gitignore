@@ -271,3 +271,4 @@ yarn-error.log*
 /htmlcov
 htmlcov
 hariart/migrations
+main.js
