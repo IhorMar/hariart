@@ -1,5 +1,5 @@
 body {
-  background: url(//hariart_frontend/templates/frontend/images/background.jpg);
+  background-image: url(/templates/frontend/images/background.jpg);
   background-size: cover;
   min-height: calc(100vh - 90px);
   background-position: center 0%;

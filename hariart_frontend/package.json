@@ -2,7 +2,7 @@
   "name": "hariart_frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "dev": "webpack --mode development --entry ./src/index.jsx --output-path ./static/frontend",
     "build": "webpack --mode production --entry ./src/index.jsx --output-path ./static/frontend"
