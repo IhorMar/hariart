@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 
 export default function Home() {
-  return <div className="bottom-text">Beautiful Spiritual Canvas</div>;
+  useEffect(() => {
+    document.querySelector("body").className = "home";
+    return () => {
+      document.querySelector("body").className = "";
+    };
+  }, []);
+
+  return <div>Beautiful Spiritual Canvas</div>;
 }
