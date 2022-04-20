@@ -15,6 +15,8 @@ class Painting(models.Model):
     mime_type = models.CharField(max_length=100)
     owner_email = models.CharField(max_length=100)
     creation_date = models.DateField()
+    height = models.PositiveIntegerField(default=1)
+    width = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return self.name
@@ -44,7 +46,7 @@ class Order(models.Model):
 class PaintingOrder(models.Model):
     painting = models.ForeignKey(Painting, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(default=1)
 
     class Meta:
         verbose_name = "PaintingOrder"
