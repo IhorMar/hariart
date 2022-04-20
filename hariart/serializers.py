@@ -1,12 +1,17 @@
 from rest_framework import serializers
-from .models import Painting, PaintingOrder, Order
+from .models import Painting, PaintingSize, PaintingOrder, Order
 
 
 class PaintingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Painting
-        fields = ('id', 'ref', 'name', 'category', 'mime_type', 'owner_email', 'creation_date', 'height', 'width')
+        fields = ('ref', 'name', 'category', 'mime_type', 'owner_email', 'creation_date', 'height', 'width')
 
+
+class PaintingSizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaintingSize
+        fields = ('id', 'painting', 'height', 'width')
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,7 +1,6 @@
 import uuid
 from django.db import models
 
-
 class Painting(models.Model):
     ref = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
@@ -15,8 +14,6 @@ class Painting(models.Model):
     mime_type = models.CharField(max_length=100)
     owner_email = models.CharField(max_length=100)
     creation_date = models.DateField()
-    height = models.PositiveIntegerField(default=1)
-    width = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return self.name
@@ -25,6 +22,15 @@ class Painting(models.Model):
         verbose_name = "Painting"
         verbose_name_plural = "Paintings"
 
+
+class PaintingSize(models.Model):
+    painting = models.ForeignKey(Painting, on_delete=models.CASCADE)
+    height = models.PositiveIntegerField(default=1)
+    width = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        verbose_name = "PaintingSize"
+        verbose_name_plural = "PaintingSizes"
 
 class Order(models.Model):
     customer_name = models.CharField(max_length=100)
