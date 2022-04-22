@@ -2,7 +2,7 @@ body {
   padding: 45px 5.5%;
   margin: 0%;
   background-color: #c0511a;
-  font-family: BasicSans, Arial, Helvetica, sans-serif;
+  font-family: "HelveticaNeueLight";
   color: #fff;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -10,4 +10,9 @@ body {
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+@font-face {
+  font-family: "HelveticaNeueLight";
+  src: url(/templates/frontend/fonts/HelveticaNeueLTStd-Roman.otf);
 }
