@@ -10,11 +10,13 @@ import Modular from "./components/modular/Modular";
 import Order from "./components/order/Order";
 import About from "./components/about/About";
 import Contacts from "./components/contacts/Contacts";
+import ScrollToTop from "./components/scroll_to_top/ScrollToTop";
 import "./App.css";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" exact element={<Home />} />
