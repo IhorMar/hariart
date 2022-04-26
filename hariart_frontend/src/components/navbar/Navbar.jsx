@@ -47,18 +47,18 @@ export default function Navbar() {
               <div className="navbar-menu__submenu--outter">
                 <div className="navbar-menu__submenu--inner">
                   <NavLink
-                    to="/window-to-another-world"
+                    to="/product-category/window-to-another-world"
                     className="submenu__link"
                   >
                     Window to another world
                   </NavLink>
-                  <NavLink to="/vedic-art" className="submenu__link">
+                  <NavLink to="/product-category/vedic-art" className="submenu__link">
                     Vedic Art
                   </NavLink>
-                  <NavLink to="/landscapes" className="submenu__link">
+                  <NavLink to="/product-category/landscapes" className="submenu__link">
                     Landscapes
                   </NavLink>
-                  <NavLink to="/modular" className="submenu__link">
+                  <NavLink to="/product-category/modular" className="submenu__link">
                     Modular
                   </NavLink>
                 </div>

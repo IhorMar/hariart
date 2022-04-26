@@ -1,0 +1,29 @@
+.picture-group-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 100px;
+}
+
+.picture-group-info__image {
+  height: auto;
+  max-width: 100%;
+  border-radius: 3px;
+}
+
+.picture-group-info__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.picture-group-info__title {
+  text-transform: uppercase;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.picture-group-info__description {
+  font-size: 14px;
+  text-align: center;
+}

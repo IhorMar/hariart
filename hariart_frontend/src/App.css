@@ -16,3 +16,17 @@ body::-webkit-scrollbar {
   font-family: "HelveticaNeueLight";
   src: url(/templates/frontend/fonts/HelveticaNeueLTStd-Roman.otf);
 }
+
+.picture-group {
+  max-width: 912px;
+  margin: 0 auto;
+  align-items: center;
+  padding: 58px 0px 36px 0px;
+}
+
+.picture-group-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
