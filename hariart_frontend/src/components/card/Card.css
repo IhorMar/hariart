@@ -3,11 +3,10 @@
   flex-direction: column;
   gap: 23px;
   padding-bottom: 68px;
+  width: 21%;
 }
 
 .card__image {
-  width: 198px;
-  height: auto;
   border-radius: 3px;
 }
 

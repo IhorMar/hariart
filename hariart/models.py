@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from rest_framework import pagination
 
 class Painting(models.Model):
     ref = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -57,3 +58,11 @@ class PaintingOrder(models.Model):
     class Meta:
         verbose_name = "PaintingOrder"
         verbose_name_plural = "PaintingOrders"
+
+
+class PageNumberPaginationWithCount(pagination.PageNumberPagination):
+    def get_paginated_response(self, data):
+        response = super(PageNumberPaginationWithCount, self).get_paginated_response(data)
+        response.data['total_pages'] = self.page.paginator.num_pages
+        response.data['current_page'] = self.page.number
+        return response
