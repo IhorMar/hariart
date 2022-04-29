@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  padding-bottom: 68px;
+  width: 21%;
+}
+
+.card__image {
+  border-radius: 3px;
+}
+
+.card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card__title {
+  font-size: 18px;
+}
+
+.card__button {
+  border: 2px solid white;
+  text-transform: uppercase;
+  background-color: #c0511a;
+  color: white;
+  width: 116px;
+  height: 27px;
+  cursor: pointer;
+}
+
+.card__button:hover {
+  background-color: white;
+  color: #c0511a;
+}

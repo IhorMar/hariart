@@ -1,0 +1,98 @@
+.contacts {
+  max-width: 912px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 58px 0px 100px 0px;
+}
+
+.contacts__title {
+  margin-bottom: 17px;
+  font-size: 32px;
+}
+
+.contacts__subtitle {
+  margin-bottom: 32px;
+  font-size: 23px;
+  line-height: 1.6;
+}
+
+.contacts__info {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.contacts__info p {
+  margin: 0;
+}
+
+.contacts__info a {
+  color: #fff;
+}
+
+.contacts__writing {
+  padding-top: 73px;
+}
+
+.contacts__form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.personal-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.personal-info__text {
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.personal-info__text--input,
+textarea {
+  border: none;
+  padding: 0 12px;
+  color: #c0511a;
+}
+
+.personal-info__text--input {
+  height: 30px;
+}
+
+.personal-info__text--input::placeholder {
+  color: #000000;
+}
+
+.personal-info__text--input:focus,
+textarea:focus {
+  outline: none;
+}
+
+.personal-info__text--input:focus::placeholder {
+  color: transparent;
+  transition: color 0.5s;
+}
+
+.submit-form {
+  border: 2px solid white;
+  text-transform: uppercase;
+  background-color: #c0511a;
+  color: white;
+  font-weight: 600;
+  width: 76px;
+  height: 43px;
+  cursor: pointer;
+}
+
+.submit-form:hover {
+  background-color: white;
+  color: #c0511a;
+}

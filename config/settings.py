@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'hariart.apps.HariartConfig',
     'rest_framework',
     'hariart_frontend',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -110,5 +111,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-    )
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'hariart.models.PageNumberPaginationWithCount',
+    'PAGE_SIZE': 16
 }

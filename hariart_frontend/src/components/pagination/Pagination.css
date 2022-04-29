@@ -1,0 +1,41 @@
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  font-size: 14px;
+  line-height: 1.62;
+  margin-bottom: 37px;
+}
+
+.pagination__point,
+.arrow-left,
+.arrow-right {
+  padding: 5px 12px;
+  background-color: rgba(0, 0, 0, 0.025);
+  cursor: pointer;
+}
+
+.pagination__point--active {
+  padding: 5px 12px;
+  background-color: #a73801;
+}
+
+.pagination__point:hover,
+.arrow-left:hover,
+.arrow-right:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.arrow-right::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f0da";
+  font-weight: 900;
+}
+
+.arrow-left::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f0d9";
+  font-weight: 900;
+}

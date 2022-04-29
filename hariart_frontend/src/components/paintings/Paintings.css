@@ -1,0 +1,29 @@
+.paintings {
+  max-width: 912px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 136px 0px 100px 0px;
+  gap: 60px;
+}
+
+.painting {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.painting__picture {
+  height: auto;
+  width: 100%;
+  border-radius: 3px;
+}
+
+.painting__title {
+  text-transform: uppercase;
+  font-size: 20px;
+}

@@ -1,0 +1,32 @@
+body {
+  padding: 45px 5.5%;
+  margin: 0%;
+  background-color: #c0511a;
+  font-family: "HelveticaNeueLight";
+  color: #fff;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "HelveticaNeueLight";
+  src: url(/templates/frontend/fonts/HelveticaNeueLTStd-Roman.otf);
+}
+
+.picture-group {
+  max-width: 912px;
+  margin: 0 auto;
+  align-items: center;
+  padding: 58px 0px 36px 0px;
+}
+
+.picture-group-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

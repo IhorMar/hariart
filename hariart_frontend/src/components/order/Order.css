@@ -1,0 +1,14 @@
+.order {
+  max-width: 912px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 58px 0px 100px 0px;
+}
+
+.order__text {
+    font-size: 22px;
+    line-height: 1.6;
+}

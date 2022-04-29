@@ -1,0 +1,19 @@
+.home {
+  background-image: url(/templates/frontend/images/background.jpg);
+  background-size: cover;
+  min-height: calc(100vh - 90px);
+  background-position: center 0%;
+}
+
+.bottom-text {
+  font-size: 42px;
+  position: absolute;
+  bottom: 40px;
+  right: 5.5%;
+  font-family: "BottomText";
+}
+
+@font-face {
+  font-family: "BottomText";
+  src: url(/templates/frontend/fonts/bottomtext.ttf);
+}
