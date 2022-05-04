@@ -1,6 +1,6 @@
 import axios from "../Config";
 
-const PictureGroupHandler = {
+const PaintingsGroupHandler = {
   getPictureGroup(params, callbacks) {
     return axios
       .get("paintings/", {
@@ -15,4 +15,4 @@ const PictureGroupHandler = {
   },
 };
 
-export default PictureGroupHandler;
+export default PaintingsGroupHandler;
