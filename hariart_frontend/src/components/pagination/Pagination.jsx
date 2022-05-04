@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Pagination.css";
 
-export default function Pagination({ pagesAmount, currentPage, onChange }) {
-  const [currentIndex, setCurrentIndex] = useState(1);
+export default function Pagination({ pagesAmount, currentPage = 1, onChange }) {
+  const [currentIndex, setCurrentIndex] = useState(currentPage);
 
   useEffect(() => setCurrentIndex(currentPage), [currentPage])
 
   useEffect(() => {
-    currentIndex != currentPage && onChange(currentIndex);
+    onChange(currentIndex);
   }, [currentIndex]);
 
   return (
