@@ -271,4 +271,4 @@ yarn-error.log*
 /htmlcov
 htmlcov
 hariart/migrations
-main.js
+hariart_frontend/static/frontend/**
