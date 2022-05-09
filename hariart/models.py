@@ -23,6 +23,7 @@ class Painting(models.Model):
     class Meta:
         verbose_name = "Painting"
         verbose_name_plural = "Paintings"
+        ordering = ['name']
 
 
 class PaintingSize(models.Model):
