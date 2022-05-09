@@ -4,13 +4,14 @@ import WindowImg from "../../../templates/frontend/images/window-to-another-worl
 import LandscapesImg from "../../../templates/frontend/images/landscapes.jpg";
 import VedicArtImg from "../../../templates/frontend/images/vedic-art.jpg";
 import ModularImg from "../../../templates/frontend/images/modular.jpg";
-import PaintingsGroupHandler from "../../services/handlers/Paintings_group";
+import PaintingsHandler from "../../services/handlers/Paintings";
 import PictureGroup from "../picture_group/Picture_group";
 import Footer from "../footer/Footer";
 import { updatePage } from "../../reducers/Picture_group";
 import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
 import { updateUrlParam, getUrlParam } from "../../utils/URL";
+import { useNavigate } from "react-router-dom";
 
 const PictureGroupView = {
   window_world: {
@@ -37,6 +38,7 @@ const PictureGroupView = {
 };
 
 export default function PaintingsGroup({ category }) {
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const selected = useSelector((state) => state.picturesGroup);
   const [pictures, setPictures] = useState({});
@@ -47,11 +49,15 @@ export default function PaintingsGroup({ category }) {
 
   const onPageChange = (page) => {
     updateUrlParam("page", page);
-    PaintingsGroupHandler.getPictureGroup(
+    PaintingsHandler.getPictureByParams(
       { category: category, page: page },
       setPictures
     );
   };
+
+  const routeChange = (ref) =>{ 
+    navigate(`/product/${ref}`);
+  }
 
   useEffect(() => {
     const currentPage = getUrlParam("page") || getCurrentPage().page || 1;
@@ -78,7 +84,7 @@ export default function PaintingsGroup({ category }) {
             />
             <div className="picture-group-cards">
               {pictures.results.map((image, i) => (
-                <Card key={i} image="" title={image.name} />
+                <Card key={i} image="" title={image.name} onClick={() => routeChange(image.ref)} />
               ))}
             </div>
             <Pagination

@@ -8,6 +8,7 @@ import About from "./components/about/About";
 import Contacts from "./components/contacts/Contacts";
 import ScrollToTop from "./components/scroll_to_top/ScrollToTop";
 import PaintingsGroup from "./components/paintings_group/Paintings_group";
+import PaintingDetails from "./components/painting_details/Painting_details";
 import "./App.css";
 
 function App() {
@@ -22,9 +23,22 @@ function App() {
           path="/product-category/window-to-another-world"
           element={<PaintingsGroup category="window_world" />}
         />
-        <Route path="/product-category/vedic-art" element={<PaintingsGroup category="vedic" />} />
-        <Route path="/product-category/landscapes" element={<PaintingsGroup category="landscapes" />} />
-        <Route path="/product-category/modular" element={<PaintingsGroup category="modular" />} />
+        <Route
+          path="/product-category/vedic-art"
+          element={<PaintingsGroup category="vedic" />}
+        />
+        <Route
+          path="/product-category/landscapes"
+          element={<PaintingsGroup category="landscapes" />}
+        />
+        <Route
+          path="/product-category/modular"
+          element={<PaintingsGroup category="modular" />}
+        />
+        <Route
+          path="/product/:ref"
+          element={<PaintingDetails />}
+        />
         <Route path="/order" element={<Order />} />
         <Route path="/authors" element={<About />} />
         <Route path="/contacts" element={<Contacts />} />

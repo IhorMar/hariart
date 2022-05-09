@@ -15,7 +15,7 @@ class Painting(models.Model):
     mime_type = models.CharField(max_length=100)
     owner_email = models.CharField(max_length=100)
     creation_date = models.DateField()
-    description = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=2000, null=True, blank=True)
 
     def __str__(self):
         return self.name

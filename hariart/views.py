@@ -6,7 +6,7 @@ from .serializers import PaintingSerializer, PaintingSizeSerializer, OrderSerial
 class PaintingViewSet(viewsets.ModelViewSet):
     serializer_class = PaintingSerializer
     queryset = Painting.objects.all()
-    filterset_fields = ['category']
+    filterset_fields = ['category', 'ref']
 
 
 class PaintingSizeViewSet(viewsets.ModelViewSet):

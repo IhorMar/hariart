@@ -5,7 +5,7 @@ from .models import Painting, PaintingSize, PaintingOrder, Order
 class PaintingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Painting
-        fields = ('ref', 'name', 'category', 'mime_type', 'owner_email', 'creation_date')
+        fields = ('ref', 'name', 'category', 'mime_type', 'owner_email', 'creation_date', 'description')
 
 
 class PaintingSizeSerializer(serializers.ModelSerializer):
