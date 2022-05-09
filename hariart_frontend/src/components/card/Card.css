@@ -6,6 +6,10 @@
   width: 21%;
 }
 
+.card:hover {
+  cursor: pointer;
+}
+
 .card__image {
   border-radius: 3px;
 }

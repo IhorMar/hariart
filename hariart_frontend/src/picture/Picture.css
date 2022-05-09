@@ -1,0 +1,36 @@
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
+.picture {
+  overflow: visible;
+  position: relative;
+}
+
+.picture-image {
+  width: 356px;
+  height: 484px;
+}
+
+.picture-open {
+  display: flex;
+  justify-content: center;
+  background-color: #c0511a;
+  cursor: pointer;
+  position: absolute;
+  z-index: 100;
+  top: 13px;
+  right: 13px;
+  height: 32px;
+  width: 32px;
+  border-radius: 3px;
+  align-items: center;
+}
+
+.picture-open:hover {
+  background-color: #a73801;
+}
+
+.picture-open::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f00e";
+  font-weight: 900;
+}
