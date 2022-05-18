@@ -49,21 +49,3 @@
   margin-right: 5px;
   vertical-align: middle;
 }
-
-.button {
-  border: 2px solid white;
-  text-transform: uppercase;
-  background-color: #c0511a;
-  color: white;
-  font-size: 21px;
-  padding: 0 10px;
-  width: fit-content;
-  height: 44px;
-  cursor: pointer;
-  font-family: "HelveticaNeueLight";
-}
-
-.button:hover {
-  background-color: white;
-  color: #c0511a;
-}

@@ -5,10 +5,15 @@ import PaintingsHandler from "../../services/handlers/Paintings";
 import Footer from "../footer/Footer";
 import "./Painting_details.css";
 import Picture from "../../picture/Picture";
+import { useNavigate } from "react-router-dom";
+import { addOrUpdateOrder } from "../../reducers/Orders";
+import { useDispatch } from "react-redux";
 
-export default function PaintingDetails({ category }) {
+export default function PaintingDetails() {
   const location = useLocation();
   const [picture, setPicture] = useState();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     PaintingsHandler.getPictureByParams(
@@ -34,7 +39,10 @@ export default function PaintingDetails({ category }) {
                 <div className="title">{picture.name}</div>
                 <div className="size">{picture.size}</div>
               </div>
-              <button className="button">Send request for the price</button>
+              <button className="button" onClick={() => {
+                dispatch(addOrUpdateOrder(picture))
+                navigate('/order')
+              }}>Send request for the price</button>
             </div>
           </div>
           <div className="description">{picture.description}</div>

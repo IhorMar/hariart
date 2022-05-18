@@ -1,5 +1,4 @@
 import { createAction, createReducer, current } from "@reduxjs/toolkit";
-import PaintingsGroup from "../components/paintings_group/Paintings_group";
 import { addOrReplace } from "../utils/CollectionUtils";
 
 const initialState = {paintingsGroup: []};

@@ -90,7 +90,7 @@ export default function Contacts() {
             <div className="personal-info">
               <div className="personal-info__text">
                 <input
-                  className="personal-info__text--input"
+                  className="input"
                   type="text"
                   placeholder="Name*"
                   onChange={(e) => setName(e.target.value)}
@@ -104,7 +104,7 @@ export default function Contacts() {
               </div>
               <div className="personal-info__text">
                 <input
-                  className="personal-info__text--input"
+                  className="input"
                   type="text"
                   placeholder="Phone*"
                   onChange={(e) => setPhone(e.target.value)}
@@ -118,17 +118,14 @@ export default function Contacts() {
               </div>
               <div className="personal-info__text">
                 <input
-                  className="personal-info__text--input"
+                  className="input"
                   type="text"
                   placeholder="E-mail*"
                   onChange={(e) => setEmail(e.target.value)}
                   required={true}
                 />
                 {emailError && (
-                  <label
-                    className="personal-info__text--error"
-                    hidden={!emailError}
-                  >
+                  <label className="personal-info__text--error">
                     *{emailError}*
                   </label>
                 )}
