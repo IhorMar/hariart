@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../footer/Footer";
 import PictureImg from "../../../templates/frontend/images/no_image.png";
 import Select from "../inputs/Select";
-import { removeOrder, updateOrder } from "../../reducers/Orders";
+import { removeOrder, updateOrder, predefineOrder } from "../../reducers/Orders";
 
 const countries = [
   {
@@ -39,7 +39,13 @@ export default function Order() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
 
-  useEffect(() => {dispatch(updateOrder(value))}, [value])
+  useEffect(() => {
+    dispatch(predefineOrder());
+  }, [])
+
+  useEffect(() => {
+    dispatch(updateOrder(value));
+  }, [value]);
 
   const validate = () => {
     if (!name) {
@@ -126,34 +132,45 @@ export default function Order() {
                 <div className="small-name">Remove</div>
               </div>
               <div className="order__info-items">
-              {selected.orders.map(({ref, amount, name}, i) =>
-                <div key={i} className="order__info-item">
-                  <div style={{ width: "12.5%" }}>
-                    <img className="small-img" src={PictureImg} />
+                {selected.orders.map(({ ref, amount, name }, i) => (
+                  <div key={i} className="order__info-item">
+                    <div style={{ width: "12.5%" }}>
+                      <img className="small-img" src={PictureImg} />
+                    </div>
+                    <div style={{ width: "37%" }}>{name}</div>
+                    <div className="quantity" style={{ width: "25%" }}>
+                      <button
+                        className="quantity__button"
+                        onClick={() =>
+                          amount > 1 &&
+                          dispatch(updateOrder({ ref: ref, act: "dec" }))
+                        }
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        className="quantity__input-box"
+                        value={amount}
+                        onChange={(e) =>
+                          setValue({ ref: ref, val: e.target.value })
+                        }
+                      ></input>
+                      <button
+                        className="quantity__button"
+                        onClick={() =>
+                          dispatch(updateOrder({ ref: ref, act: "inc" }))
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div
+                      className="remove"
+                      onClick={() => dispatch(removeOrder({ ref: ref }))}
+                    ></div>
                   </div>
-                  <div style={{ width: "37%" }}>{name}</div>
-                  <div className="quantity" style={{ width: "25%" }}>
-                    <button
-                      className="quantity__button"
-                      onClick={() => amount > 1 && dispatch(updateOrder({ref: ref, act: "dec"}))}
-                    >
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      className="quantity__input-box"
-                      value={amount}
-                      onChange={(e) => setValue({ref: ref, val: e.target.value})}
-                    ></input>
-                    <button
-                      className="quantity__button"
-                      onClick={() => dispatch(updateOrder({ref: ref, act: "inc"}))}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <div className="remove" onClick={() => dispatch(removeOrder({ref: ref}))}></div>
-                </div>)}
+                ))}
               </div>
             </div>
             <div className="order__form">
