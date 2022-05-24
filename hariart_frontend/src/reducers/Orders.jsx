@@ -4,18 +4,19 @@ import {
   addOrUpdateInWith,
   updateInWith,
 } from "../utils/CollectionUtils";
-import { getOrders, setOrders } from "../utils/Storage";
+import { getOrders, setOrders, removeOrders } from "../utils/Storage";
 
 const initialState = { orders: [] };
 
-export const predefineOrder = createAction("predefineOrder")
+export const predefineOrder = createAction("predefineOrder");
 export const updateOrder = createAction("updateOrder");
 export const removeOrder = createAction("removeOrder");
 export const addOrUpdateOrder = createAction("addOrUpdateOrder");
+export const removeAllOrders = createAction("removeAllOrders");
 
 export const orders = createReducer(initialState, {
   [predefineOrder]: (state) => {
-    return {...state, orders: getOrders()}
+    return { ...state, orders: getOrders() };
   },
   [updateOrder]: (state, { payload }) => {
     const ordersList = updateInWith(
@@ -66,6 +67,14 @@ export const orders = createReducer(initialState, {
     return {
       ...state,
       orders: ordersList,
+    };
+  },
+  [removeAllOrders]: (state) => {
+    removeOrders();
+
+    return {
+      ...state,
+      ...initialState,
     };
   },
 });
