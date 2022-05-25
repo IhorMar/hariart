@@ -2,7 +2,7 @@ body {
   padding: 45px 5.5%;
   margin: 0%;
   background-color: #c0511a;
-  font-family: "HelveticaNeueLight";
+  font-family: "HelveticaNeueLight", Arial, Helvetica, sans-serifs;
   color: #fff;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -18,7 +18,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 

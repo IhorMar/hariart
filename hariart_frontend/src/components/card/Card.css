@@ -29,7 +29,7 @@
   text-transform: uppercase;
   background-color: #c0511a;
   color: white;
-  width: 116px;
+  width: fit-content;
   height: 27px;
   cursor: pointer;
 }

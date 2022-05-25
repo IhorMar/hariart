@@ -62,7 +62,7 @@
   background-color: #c0511a;
   color: white;
   font-weight: 600;
-  width: 76px;
+  width: fit-content;
   height: 43px;
   cursor: pointer;
 }

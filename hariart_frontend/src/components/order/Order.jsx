@@ -11,27 +11,28 @@ import {
   updateOrder,
   predefineOrder,
 } from "../../reducers/Orders";
-
-const countries = [
-  {
-    id: 0,
-    name: "Lithuania",
-  },
-  {
-    id: 1,
-    name: "Ukraine",
-  },
-  {
-    id: 2,
-    name: "Russia",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export default function Order() {
   const dispatch = useDispatch();
   const selected = useSelector((state) => state);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const countries = [
+    {
+      id: 0,
+      name: t("country.lt"),
+    },
+    {
+      id: 1,
+      name: t("country.ua"),
+    },
+    {
+      id: 2,
+      name: t("country.ru"),
+    },
+  ];
 
   const [value, setValue] = useState(1);
   const [selectedValue, setSelectedValue] = useState(null);
@@ -72,11 +73,9 @@ export default function Order() {
       setPhoneError(
         <label className="error-message">
           {phone ? (
-            <>Invalid billing telephone number</>
+            <>{t("order.error-phone")}</>
           ) : (
-            <>
-              <strong>Billing Phone</strong> is a required field
-            </>
+            <>{t("order.required-field-phone")}</>
           )}
         </label>
       );
@@ -91,11 +90,9 @@ export default function Order() {
       setEmailError(
         <label className="error-message">
           {email ? (
-            <>Invalid billing email adress</>
+            <>{t("order.error-email")}</>
           ) : (
-            <>
-              <strong>Billing Email</strong> is a required field
-            </>
+            <>{t("order.required-field-email")}</>
           )}
         </label>
       );
@@ -108,18 +105,18 @@ export default function Order() {
     <>
       <div className="order">
         {selected.timeout.timeout ? (
-          <div className="error-message">Sorry, your session has expired.</div>
+          <div className="error-message">{t("order.session-expired")}</div>
         ) : (
           <>
             <div className="order--error">
               {nameError && (
                 <label className="error-message">
-                  <strong>Billing Name</strong> is a required field
+                  {t("order.required-field-name")}
                 </label>
               )}
               {surnameError && (
                 <label className="error-message">
-                  <strong>Billing Surname</strong> is a required field
+                  {t("order.required-field-surname")}
                 </label>
               )}
               {emailError}
@@ -131,20 +128,20 @@ export default function Order() {
                   className="button"
                   onClick={() => navigate("/paintings")}
                 >
-                  Back to paintings
+                  {t("order.b1")}
                 </button>
                 <div className="order__info">
                   <div className="order__info-header">
                     <div className="small-name" style={{ width: "12.5%" }}>
-                      Product
+                      {t("order.product")}
                     </div>
                     <div className="small-name" style={{ width: "37%" }}>
-                      Name
+                      {t("order.title")}
                     </div>
                     <div className="small-name" style={{ width: "25%" }}>
-                      Qty
+                      {t("order.Qty")}
                     </div>
-                    <div className="small-name">Remove</div>
+                    <div className="small-name">{t("order.remove")}</div>
                   </div>
                   <div className="order__info-items">
                     {selected.orders.orders.map(({ ref, amount, name }, i) => (
@@ -192,34 +189,34 @@ export default function Order() {
                   <input
                     className="input order-form__input"
                     type="text"
-                    placeholder="Name"
+                    placeholder={t("order.name")}
                     onChange={(e) => setName(e.target.value)}
                     required={true}
                   />
                   <input
                     className="input order-form__input"
                     type="text"
-                    placeholder="Surname"
+                    placeholder={t("order.surname")}
                     onChange={(e) => setSurname(e.target.value)}
                     required={true}
                   />
                   <input
                     className="input order-form__input"
                     type="text"
-                    placeholder="Email"
+                    placeholder={t("order.email")}
                     onChange={(e) => setEmail(e.target.value)}
                     required={true}
                   />
                   <input
                     className="input order-form__input"
                     type="text"
-                    placeholder="Phone"
+                    placeholder={t("order.phone")}
                     onChange={(e) => setPhone(e.target.value)}
                     required={true}
                   />
                 </div>
                 <div className="choose-country">
-                  <div>Country</div>
+                  <div>{t("order.country")}</div>
                   <Select
                     options={countries}
                     id="id"
@@ -230,17 +227,11 @@ export default function Order() {
                   />
                 </div>
                 <button className="button" onClick={() => validate()}>
-                  Place order
+                  {t("order.b2")}
                 </button>
               </>
             ) : (
-              <p className="order__text">
-                Hari Art site offers you beautiful canvas pictures printing in
-                large digital format.&nbsp;Choose a picture you want to order,
-                go to menu <strong>order </strong>and click the button{" "}
-                <strong>request for the price</strong> fill the form and we will
-                contact you.
-              </p>
+              <p className="order__text">{t("order.text")}</p>
             )}
           </>
         )}
