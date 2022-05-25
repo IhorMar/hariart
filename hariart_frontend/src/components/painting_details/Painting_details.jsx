@@ -8,12 +8,15 @@ import Picture from "../../picture/Picture";
 import { useNavigate } from "react-router-dom";
 import { addOrUpdateOrder } from "../../reducers/Orders";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function PaintingDetails() {
   const location = useLocation();
   const [picture, setPicture] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     PaintingsHandler.getPictureByParams(
@@ -39,10 +42,15 @@ export default function PaintingDetails() {
                 <div className="title">{picture.name}</div>
                 <div className="size">{picture.size}</div>
               </div>
-              <button className="button" onClick={() => {
-                dispatch(addOrUpdateOrder(picture))
-                navigate('/order')
-              }}>Send request for the price</button>
+              <button
+                className="button"
+                onClick={() => {
+                  dispatch(addOrUpdateOrder(picture));
+                  navigate("/order");
+                }}
+              >
+                {t("painting_details.button")}
+              </button>
             </div>
           </div>
           <div className="description">{picture.description}</div>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { isTimeout } from "../../reducers/Time";
 
-const TIME_LIMIT = 1.8 * 10 ** 5;
+const TIME_LIMIT = 1.8 * 10 ** 6;
 
 export default function SessionTimeout({ onTimeOut }) {
   const dispatch = useDispatch();

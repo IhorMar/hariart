@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./Navbar.css";
-import logo from "../../../templates/frontend/images/logo.png"
+import logo from "../../../templates/frontend/images/logo.png";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
   const [showSubMenu, setSubMenu] = useState(false);
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="navbar">
       <NavLink to="/">
-        <img
-          className="navbar__logo"
-          src={logo}
-          alt="Hariart"
-        />
+        <img className="navbar__logo" src={logo} alt="Hariart" />
       </NavLink>
       <div className="navbar-menu">
         <div className="navbar-menu--navigation">
           <NavLink to="/" className="navbar__link">
-            Home
+            {t("navbar.home")}
           </NavLink>
           <div
             onMouseOver={() => {
@@ -41,7 +39,7 @@ export default function Navbar() {
                 )
               }
             >
-              Paintings
+              {t("navbar.paintings")}
             </NavLink>
             {showSubMenu && (
               <div className="navbar-menu__submenu--outter">
@@ -50,41 +48,68 @@ export default function Navbar() {
                     to="/product-category/window-to-another-world"
                     className="submenu__link"
                   >
-                    Window to another world
+                    {t("navbar.window-to-another-world")}
                   </NavLink>
-                  <NavLink to="/product-category/vedic-art" className="submenu__link">
-                    Vedic Art
+                  <NavLink
+                    to="/product-category/vedic-art"
+                    className="submenu__link"
+                  >
+                    {t("navbar.vedic-art")}
                   </NavLink>
-                  <NavLink to="/product-category/landscapes" className="submenu__link">
-                    Landscapes
+                  <NavLink
+                    to="/product-category/landscapes"
+                    className="submenu__link"
+                  >
+                    {t("navbar.landscapes")}
                   </NavLink>
-                  <NavLink to="/product-category/modular" className="submenu__link">
-                    Modular
+                  <NavLink
+                    to="/product-category/modular"
+                    className="submenu__link"
+                  >
+                    {t("navbar.modular")}
                   </NavLink>
                 </div>
               </div>
             )}
           </div>
           <NavLink to="/order" className="navbar__link">
-            Order
+            {t("navbar.order")}
           </NavLink>
           <NavLink to="/authors" className="navbar__link">
-            About us
+            {t("navbar.about-us")}
           </NavLink>
           <NavLink to="/contacts" className="navbar__link">
-            Contacts
+            {t("navbar.contacts")}
           </NavLink>
         </div>
         <div className="navbar-menu--languages">
-          <NavLink to="/en" className="navbar__link">
+          <div
+            className="navbar__link"
+            onClick={() => {
+              localStorage.setItem("Lanuage", "en");
+              i18n.changeLanguage("en");
+            }}
+          >
             EN
-          </NavLink>
-          <NavLink to="/ru" className="navbar__link">
+          </div>
+          <div
+            className="navbar__link"
+            onClick={() => {
+              localStorage.setItem("Lanuage", "ru");
+              i18n.changeLanguage("ru");
+            }}
+          >
             RU
-          </NavLink>
-          <NavLink to="/lt" className="navbar__link">
+          </div>
+          <div
+            className="navbar__link"
+            onClick={() => {
+              localStorage.setItem("Lanuage", "lt");
+              i18n.changeLanguage("lt");
+            }}
+          >
             LT
-          </NavLink>
+          </div>
         </div>
       </div>
     </div>

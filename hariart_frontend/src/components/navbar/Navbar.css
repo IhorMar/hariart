@@ -24,6 +24,7 @@
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .navbar-menu--languages {
