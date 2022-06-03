@@ -108,22 +108,22 @@ export default function Order() {
           <div className="error-message">{t("order.session-expired")}</div>
         ) : (
           <>
-            <div className="order--error">
-              {nameError && (
-                <label className="error-message">
-                  {t("order.required-field-name")}
-                </label>
-              )}
-              {surnameError && (
-                <label className="error-message">
-                  {t("order.required-field-surname")}
-                </label>
-              )}
-              {emailError}
-              {phoneError}
-            </div>
             {selected.orders.orders.length ? (
               <>
+                <div className="order--error">
+                  {nameError && (
+                    <label className="error-message">
+                      {t("order.required-field-name")}
+                    </label>
+                  )}
+                  {surnameError && (
+                    <label className="error-message">
+                      {t("order.required-field-surname")}
+                    </label>
+                  )}
+                  {emailError}
+                  {phoneError}
+                </div>
                 <button
                   className="button"
                   onClick={() => navigate("/paintings")}

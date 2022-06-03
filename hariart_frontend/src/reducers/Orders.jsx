@@ -27,7 +27,7 @@ export const orders = createReducer(initialState, {
       (val) => {
         switch (payload.act) {
           case "inc":
-            return val + 1;
+            return parseInt(val) + 1;
           case "dec":
             return val - 1;
           default:
