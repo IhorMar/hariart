@@ -1,0 +1,29 @@
+version: "3"
+services:
+  database:
+    image: postgres:12.7
+    environment:
+        POSTGRES_DB: hariart_db
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: wsV5q6Ahx11aIohWTUl8
+    ports: 
+      - 5432:5432
+
+  app:
+    build: .
+    # command: python manage.py runserver
+    command: >
+          sh -c "python manage.py makemigrations && 
+                 python manage.py migrate &&
+                 python manage.py runserver"
+    depends_on:
+      - database
+    ports:
+      - 8000:8000
+    environment:
+      DB_HOST: hariart-db.c2hz8scawfhd.us-east-1.rds.amazonaws.com
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: wsV5q6Ahx11aIohWTUl8
+      POSTGRES_DB: hariart_db
+    volumes:
+      - .:/app
