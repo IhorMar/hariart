@@ -1,0 +1,18 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.docker
+
+# Python
+config/__pycache__/
+hariart/__pycache__/
+hariart/migrations/
+hariart_frontend/__pycache__/
+hariart_frontend/node_modules/
+.idea/
+backup_data/
+
+# Local PostgreSQL data
+data/

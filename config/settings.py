@@ -3,11 +3,17 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-ael0-!v6mq$p1e$b0vsb3l!askb8!@hevl-p_rpjsxb1ur)+5r'
+SECRET_KEY = os.environ.get('SECRET_KEY') #'django-insecure-ael0-!v6mq$p1e$b0vsb3l!askb8!@hevl-p_rpjsxb1ur)+5r'
 
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
+ALLOWED_HOSTS.extend(
+    filter(
+        None,
+        os.environ.get('ALLOWED_HOSTS', '').split(','),
+    )
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -57,13 +63,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-     'default': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRES_DB') or "hariart_db",
-        'USER': os.environ.get('POSTGRES_USER') or "postgres",
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD') or "wsV5q6Ahx11aIohWTUl8",
-        'HOST': os.environ.get('DB_HOST') or "hariart-db.c2hz8scawfhd.us-east-1.rds.amazonaws.com",
-        'PORT': '5432',
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
     }
 }
 
