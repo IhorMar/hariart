@@ -56,38 +56,13 @@
   gap: 4px;
 }
 
-.personal-info__text--input,
-textarea {
-  border: none;
-  padding: 0 12px;
-  color: #c0511a;
-}
-
-.personal-info__text--input {
-  height: 30px;
-}
-
-.personal-info__text--input::placeholder {
-  color: #000000;
-}
-
-.personal-info__text--input:focus,
-textarea:focus {
-  outline: none;
-}
-
-.personal-info__text--input:focus::placeholder {
-  color: transparent;
-  transition: color 0.5s;
-}
-
 .submit-form {
   border: 2px solid white;
   text-transform: uppercase;
   background-color: #c0511a;
   color: white;
   font-weight: 600;
-  width: 76px;
+  width: fit-content;
   height: 43px;
   cursor: pointer;
 }

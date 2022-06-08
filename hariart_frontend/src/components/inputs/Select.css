@@ -1,0 +1,59 @@
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
+.select {
+  display: flex;
+  width: 31.5%;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.select-control {
+  display: flex;
+}
+
+.select-control .input {
+  width: 100%;
+  color: black;
+}
+
+.options {
+  background-color: white;
+  flex-direction: column;
+  display: flex;
+  color: black;
+  font-size: 16px;
+}
+
+.option, .option--selected {
+  padding: 6px;
+}
+
+.option--selected {
+  background-color: #DDDDDD;
+}
+
+.option:hover, .option--selected:hover {
+  background-color: #0073aa;
+  color: white;
+}
+
+.caret {
+  padding-right: 8px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.caret--down::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f0d7";
+  font-weight: 900;
+  color: #888;
+}
+
+.caret--up::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f0d8";
+  font-weight: 900;
+  color: #888;
+}

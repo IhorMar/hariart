@@ -15,6 +15,7 @@ class Painting(models.Model):
     mime_type = models.CharField(max_length=100)
     owner_email = models.CharField(max_length=100)
     creation_date = models.DateField()
+    description = models.CharField(max_length=2000, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -22,6 +23,7 @@ class Painting(models.Model):
     class Meta:
         verbose_name = "Painting"
         verbose_name_plural = "Paintings"
+        ordering = ['name']
 
 
 class PaintingSize(models.Model):

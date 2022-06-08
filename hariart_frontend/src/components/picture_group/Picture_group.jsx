@@ -1,7 +1,7 @@
 import React from "react";
 import "./Picture_group.css";
 
-export default function PictureGroupInfo({ image, title, description }) {
+export default function PictureGroup({ image, title, description }) {
   return (
     <div className="picture-group-info">
       <img className="picture-group-info__image" src={image} alt="No image" />
