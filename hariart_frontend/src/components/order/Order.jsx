@@ -144,10 +144,10 @@ export default function Order() {
                     <div className="small-name">{t("order.remove")}</div>
                   </div>
                   <div className="order__info-items">
-                    {selected.orders.orders.map(({ ref, amount, name }, i) => (
+                    {selected.orders.orders.map(({ ref, painting, amount, name }, i) => (
                       <div key={i} className="order__info-item">
                         <div style={{ width: "12.5%" }}>
-                          <img className="small-img" src={PictureImg} />
+                          <img className="small-img" src={painting || PictureImg} />
                         </div>
                         <div style={{ width: "37%" }}>{name}</div>
                         <div className="quantity" style={{ width: "25%" }}>

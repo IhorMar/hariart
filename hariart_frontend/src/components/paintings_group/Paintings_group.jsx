@@ -88,7 +88,7 @@ export default function PaintingsGroup({ category }) {
               {pictures.results.map((image, i) => (
                 <Card
                   key={i}
-                  image=""
+                  image={image.painting}
                   title={image.name}
                   onClick={() => routeChange(image.ref)}
                 />
