@@ -40,6 +40,7 @@ export default function SessionTimeout({ onTimeOut }) {
 
     return () => {
       clearTimeout(startTimerInterval.current);
+      localStorage.removeItem("lastTimeStamp");
       window.removeEventListener("click", resetTimer);
       window.removeEventListener("load", resetTimer);
       window.removeEventListener("scroll", resetTimer);

@@ -12,6 +12,7 @@
 
 .card__image {
   border-radius: 3px;
+  aspect-ratio: 1/1;
 }
 
 .card__info {
