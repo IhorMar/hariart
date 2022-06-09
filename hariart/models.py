@@ -1,9 +1,11 @@
+from distutils.command import upload
 import uuid
 from django.db import models
 from rest_framework import pagination
 
 class Painting(models.Model):
     ref = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    painting = models.ImageField(upload_to='media/', null=True)
     name = models.CharField(max_length=100)
     CATEGORY_CHOICES = (
         ('window_world', 'Window to another world'),
@@ -12,7 +14,6 @@ class Painting(models.Model):
         ('modular', 'Modular'),
     )
     category = models.CharField(max_length=23, choices=CATEGORY_CHOICES)
-    mime_type = models.CharField(max_length=100)
     owner_email = models.CharField(max_length=100)
     creation_date = models.DateField()
     description = models.CharField(max_length=2000, null=True, blank=True)
