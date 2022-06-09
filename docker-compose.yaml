@@ -3,9 +3,9 @@ services:
   database:
     image: postgres:12.7
     environment:
-      POSTGRES_DB: hariart_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 12102000
+      POSTGRES_DB: db_name
+      POSTGRES_USER: db_user_name
+      POSTGRES_PASSWORD: db_user_password
 
   app:
     build: .
@@ -19,11 +19,11 @@ services:
     volumes:
       - .:/app
     environment:
-      - SECRET_KEY=devsecretkey
+      - SECRET_KEY=secret_key
       - DEBUG=1
       - DB_HOST=database
-      - DB_NAME=hariart_db
-      - DB_USER=postgres
-      - DB_PASS=12102000
+      - DB_NAME=db_name
+      - DB_USER=db_user_name
+      - DB_PASS=db_user_password
     depends_on:
       - database
