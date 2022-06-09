@@ -36,7 +36,7 @@ export default function PaintingDetails() {
       {picture && (
         <div className="painting-details">
           <div className="painting-details__header">
-            <Picture />
+            <Picture image={picture.painting} />
             <div className="header__info">
               <div className="info">
                 <div className="title">{picture.name}</div>

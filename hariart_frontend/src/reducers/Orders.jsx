@@ -46,7 +46,7 @@ export const orders = createReducer(initialState, {
   [addOrUpdateOrder]: (state, { payload }) => {
     const ordersList = addOrUpdateInWith(
       current(state).orders,
-      { ref: payload.ref, amount: 1, name: payload.name },
+      { ref: payload.ref, amount: 1, name: payload.name, painting: payload.painting },
       "ref",
       "amount",
       (amount) => amount + 1

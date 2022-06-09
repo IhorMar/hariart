@@ -3,9 +3,9 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY') #'django-insecure-ael0-!v6mq$p1e$b0vsb3l!askb8!@hevl-p_rpjsxb1ur)+5r'
+SECRET_KEY = os.environ.get('SECRET_KEY') or 'django-insecure-ael0-!v6mq$p1e$b0vsb3l!askb8!@hevl-p_rpjsxb1ur)+5r'
 
-DEBUG = bool(int(os.environ.get('DEBUG', 0)))
+DEBUG = True
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS.extend(
@@ -122,3 +122,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'hariart.models.PageNumberPaginationWithCount',
     'PAGE_SIZE': 16
 }
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIAUHZUJAA7KSCC4UZH '
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'hariartbucket'
+AWS_QUERYSTRING_AUTH = False
