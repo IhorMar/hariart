@@ -19,8 +19,9 @@ COPY . /app
 WORKDIR /app
 EXPOSE 8000
 
-RUN python -m venv /py && \
+RUN python3 -m venv /py && \
     /py/bin/pip install --upgrade pip && \
+    apk add -u zlib-dev jpeg-dev gcc musl-dev && \
     apk add --update --no-cache postgresql-client && \
     apk add --update --no-cache --virtual .tmp-deps \
         build-base postgresql-dev musl-dev && \

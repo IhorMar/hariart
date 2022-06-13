@@ -12,6 +12,7 @@ class PaintingViewSet(viewsets.ModelViewSet):
 class PaintingSizeViewSet(viewsets.ModelViewSet):
     serializer_class = PaintingSizeSerializer
     queryset = PaintingSize.objects.all()
+    filterset_fields = ['painting']
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer

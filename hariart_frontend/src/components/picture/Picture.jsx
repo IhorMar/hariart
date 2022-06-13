@@ -1,5 +1,5 @@
-import React, { useEffect, useState, createRef } from "react";
-import PictureImg from "../../templates/frontend/images/no_image.png";
+import React, { useState, createRef } from "react";
+import PictureImg from "../../../templates/frontend/images/no_image.png";
 import "./Picture.css";
 import "photoswipe/dist/photoswipe.css";
 import "photoswipe/dist/default-skin/default-skin.css";
@@ -20,8 +20,8 @@ export default function Picture({ image, increasable = true }) {
     } = imageRef.current.getBoundingClientRect();
 
     const x = ((e.pageX - offsetLeft) / parseInt(width, 10)) * 100;
-    const y = (((e.clientY - offsetTop) * 100) / parseInt(height / 2, 10));
-    
+    const y = ((e.clientY - offsetTop) * 100) / parseInt(height / 2, 10);
+
     setMouseX(x);
     setMouseY(y);
   };
@@ -37,7 +37,9 @@ export default function Picture({ image, increasable = true }) {
       <div
         className={zoom ? "picture-increased" : "picture-image"}
         style={{
-          transformOrigin: zoom && `${mouseX > 0 ? mouseX : 0}% ${mouseY < 100 ? mouseY : 100 }%`,
+          transformOrigin:
+            zoom &&
+            `${mouseX > 0 ? mouseX : 0}% ${mouseY < 100 ? mouseY : 100}%`,
           backgroundImage: `url('${image || PictureImg}')`,
         }}
       />
