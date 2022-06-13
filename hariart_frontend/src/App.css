@@ -37,7 +37,7 @@ input[type="number"] {
 .picture-group-cards {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 35px;
   flex-wrap: wrap;
 }
 

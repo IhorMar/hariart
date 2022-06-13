@@ -4,7 +4,7 @@ import { getLastSegment } from "../../utils/URL";
 import PaintingsHandler from "../../services/handlers/Paintings";
 import Footer from "../footer/Footer";
 import "./Painting_details.css";
-import Picture from "../../picture/Picture";
+import Picture from "../picture/Picture";
 import { useNavigate } from "react-router-dom";
 import { addOrUpdateOrder } from "../../reducers/Orders";
 import { useDispatch } from "react-redux";
@@ -25,7 +25,9 @@ export default function PaintingDetails() {
         PaintingsHandler.getSizeOfPictureByRef(results[0].ref, (res) =>
           setPicture({
             ...results[0],
-            size: `${res.results[0].height}x${res.results[0].width}`,
+            size:
+              res.results[0] &&
+              `${res.results[0].height}x${res.results[0].width}`,
           })
         )
     );
@@ -40,7 +42,7 @@ export default function PaintingDetails() {
             <div className="header__info">
               <div className="info">
                 <div className="title">{picture.name}</div>
-                <div className="size">{picture.size}</div>
+                {picture.size && <div className="size">{picture.size}</div>}
               </div>
               <button
                 className="button"
