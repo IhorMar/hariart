@@ -16,7 +16,7 @@ const PaintingsHandler = {
   getSizeOfPictureByRef(ref, callbacks) {
     return axios
       .get("painting_sizes/", {
-        params: { ref: ref },
+        params: { painting: ref },
       })
       .then(({data}) => {
         callbacks(data)

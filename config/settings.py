@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+import mimetypes
+
+mimetypes.add_type("text/javascript", ".js", True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -65,10 +68,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': os.environ.get('DB_HOST') or 'db_host',
-        'NAME': os.environ.get('DB_NAME') or 'db_name',
-        'USER': os.environ.get('DB_USER') or 'db_user_name',
-        'PASSWORD': os.environ.get('DB_PASS') or 'db_user_password',
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
+        'PORT': '5432',
     }
 }
 
