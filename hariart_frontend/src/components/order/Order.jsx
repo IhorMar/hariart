@@ -12,6 +12,7 @@ import {
   predefineOrder,
 } from "../../reducers/Orders";
 import { useTranslation } from "react-i18next";
+import OrdersHelper from "../../services/handlers/Orders"
 
 export default function Order() {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ export default function Order() {
     dispatch(updateOrder(value));
   }, [value]);
 
-  const validate = () => {
+  const isFormValid = () => {
     if (!name) {
       setNameError(true);
     } else {
@@ -99,7 +100,21 @@ export default function Order() {
     } else {
       setEmailError(false);
     }
+    return !(emailError || phoneError || nameError || surnameError)
   };
+
+  const onSubmit = () => {
+    if (isFormValid()) {
+      OrdersHelper.sendOrder({
+        phone: phone,
+        email: email,
+        name: name,
+        surname: surname,
+        country: selectedValue,
+        paintings: selected.orders.orders
+      })
+    }
+  }
 
   return (
     <>
@@ -226,7 +241,7 @@ export default function Order() {
                     onChange={(val) => setSelectedValue(val)}
                   />
                 </div>
-                <button className="button" onClick={() => validate()}>
+                <button className="button" onClick={() => onSubmit()}>
                   {t("order.b2")}
                 </button>
               </>
