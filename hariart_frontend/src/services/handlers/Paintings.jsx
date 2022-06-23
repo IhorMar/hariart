@@ -6,8 +6,8 @@ const PaintingsHandler = {
       .get("paintings/", {
         params: { ...params },
       })
-      .then(({data}) => {
-        callbacks(data)
+      .then(({ data }) => {
+        callbacks(data);
       })
       .catch((error) => {
         Promise.reject(error);
@@ -18,8 +18,8 @@ const PaintingsHandler = {
       .get("painting_sizes/", {
         params: { painting: ref },
       })
-      .then(({data}) => {
-        callbacks(data)
+      .then(({ data }) => {
+        callbacks(data);
       })
       .catch((error) => {
         Promise.reject(error);

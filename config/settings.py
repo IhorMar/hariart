@@ -28,14 +28,14 @@ INSTALLED_APPS = [
     'hariart.apps.HariartConfig',
     'rest_framework',
     'hariart_frontend',
-    'django_filters'
+    'django_filters',
+    'phonenumber_field'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -122,6 +122,9 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'hariart.models.PageNumberPaginationWithCount',
     'PAGE_SIZE': 16
@@ -133,3 +136,9 @@ AWS_ACCESS_KEY_ID = 'AKIAUHZUJAA7KSCC4UZH '
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'hariartbucket'
 AWS_QUERYSTRING_AUTH = False
+
+CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:8000']
+
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+SENDGRID_API_KEY = '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' #here your send grid api key
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
