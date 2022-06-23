@@ -57,6 +57,7 @@ export default function Contacts() {
         email: email,
         name: name,
         message: message,
+        language: localStorage.getItem("Lanuage")
       });
     }
   };

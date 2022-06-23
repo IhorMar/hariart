@@ -22,15 +22,15 @@ export default function Order() {
 
   const countries = [
     {
-      id: 0,
+      id: "LT",
       name: t("country.lt"),
     },
     {
-      id: 1,
+      id: "UA",
       name: t("country.ua"),
     },
     {
-      id: 2,
+      id: "RU",
       name: t("country.ru"),
     },
   ];
