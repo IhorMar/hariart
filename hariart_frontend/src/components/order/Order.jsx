@@ -12,7 +12,7 @@ import {
   predefineOrder,
 } from "../../reducers/Orders";
 import { useTranslation } from "react-i18next";
-import OrdersHelper from "../../services/handlers/Orders"
+import OrdersHelper from "../../services/handlers/Orders";
 
 export default function Order() {
   const dispatch = useDispatch();
@@ -38,14 +38,14 @@ export default function Order() {
   const [value, setValue] = useState(1);
   const [selectedValue, setSelectedValue] = useState(null);
 
-  const [name, setName] = useState("");
-  const [nameError, setNameError] = useState(false);
-  const [surname, setSurname] = useState("");
-  const [surnameError, setSurnameError] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [phoneError, setPhoneError] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
+  const [name, setName] = useState();
+  const [nameError, setNameError] = useState(true);
+  const [surname, setSurname] = useState();
+  const [surnameError, setSurnameError] = useState(true);
+  const [phone, setPhone] = useState();
+  const [phoneError, setPhoneError] = useState(true);
+  const [email, setEmail] = useState();
+  const [emailError, setEmailError] = useState(true);
 
   useEffect(() => {
     dispatch(predefineOrder());
@@ -56,29 +56,21 @@ export default function Order() {
     dispatch(updateOrder(value));
   }, [value]);
 
-  const isFormValid = () => {
+  const validateForm = () => {
     if (!name) {
-      setNameError(true);
+      setNameError("order.required-field-name");
     } else {
       setNameError(false);
     }
     if (!surname) {
-      setSurnameError(true);
+      setSurnameError("order.required-field-surname");
     } else {
       setSurnameError(false);
     }
     if (
       !/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/.test(phone)
     ) {
-      setPhoneError(
-        <label className="error-message">
-          {phone ? (
-            <>{t("order.error-phone")}</>
-          ) : (
-            <>{t("order.required-field-phone")}</>
-          )}
-        </label>
-      );
+      setPhoneError(phone ? "order.error-phone" : "order.required-field-phone");
     } else {
       setPhoneError(false);
     }
@@ -87,34 +79,24 @@ export default function Order() {
         email
       )
     ) {
-      setEmailError(
-        <label className="error-message">
-          {email ? (
-            <>{t("order.error-email")}</>
-          ) : (
-            <>{t("order.required-field-email")}</>
-          )}
-        </label>
-      );
+      setEmailError(email ? "order.error-email" : "order.required-field-email");
     } else {
       setEmailError(false);
     }
-    return !(emailError || phoneError || nameError || surnameError)
   };
 
-  const onSubmit = () => {
-    if (isFormValid()) {
+  useEffect(() => {
+    if (!emailError && !phoneError && !nameError && !surnameError) {
       OrdersHelper.sendOrder({
         phone: phone,
         email: email,
         name: name,
         surname: surname,
         country: selectedValue,
-        paintings: selected.orders.orders
-      })
+        paintings: selected.orders.orders,
+      });
     }
-  }
-
+  }, [emailError, phoneError, nameError, surnameError]);
   return (
     <>
       <div className="order">
@@ -125,18 +107,18 @@ export default function Order() {
             {selected.orders.orders.length ? (
               <>
                 <div className="order--error">
-                  {nameError && (
-                    <label className="error-message">
-                      {t("order.required-field-name")}
-                    </label>
+                  {typeof nameError === "string" && (
+                    <label className="error-message">{t(nameError)}</label>
                   )}
-                  {surnameError && (
-                    <label className="error-message">
-                      {t("order.required-field-surname")}
-                    </label>
+                  {typeof surnameError === "string" && (
+                    <label className="error-message">{t(surnameError)}</label>
                   )}
-                  {emailError}
-                  {phoneError}
+                  {typeof emailError === "string" && (
+                    <label className="error-message">{t(emailError)}</label>
+                  )}
+                  {typeof phoneError === "string" && (
+                    <label className="error-message">{t(phoneError)}</label>
+                  )}
                 </div>
                 <button
                   className="button"
@@ -158,45 +140,50 @@ export default function Order() {
                     <div className="small-name">{t("order.remove")}</div>
                   </div>
                   <div className="order__info-items">
-                    {selected.orders.orders.map(({ ref, painting, amount, name }, i) => (
-                      <div key={i} className="order__info-item">
-                        <div style={{ width: "12.5%" }}>
-                          <img className="small-img" src={painting || PictureImg} />
+                    {selected.orders.orders.map(
+                      ({ ref, painting, amount, name }, i) => (
+                        <div key={i} className="order__info-item">
+                          <div style={{ width: "12.5%" }}>
+                            <img
+                              className="small-img"
+                              src={painting || PictureImg}
+                            />
+                          </div>
+                          <div style={{ width: "37%" }}>{name}</div>
+                          <div className="quantity" style={{ width: "25%" }}>
+                            <button
+                              className="quantity__button"
+                              onClick={() =>
+                                amount > 1 &&
+                                dispatch(updateOrder({ ref: ref, act: "dec" }))
+                              }
+                            >
+                              -
+                            </button>
+                            <input
+                              type="number"
+                              className="quantity__input-box"
+                              value={amount}
+                              onChange={(e) =>
+                                setValue({ ref: ref, val: e.target.value })
+                              }
+                            ></input>
+                            <button
+                              className="quantity__button"
+                              onClick={() =>
+                                dispatch(updateOrder({ ref: ref, act: "inc" }))
+                              }
+                            >
+                              +
+                            </button>
+                          </div>
+                          <div
+                            className="remove"
+                            onClick={() => dispatch(removeOrder({ ref: ref }))}
+                          ></div>
                         </div>
-                        <div style={{ width: "37%" }}>{name}</div>
-                        <div className="quantity" style={{ width: "25%" }}>
-                          <button
-                            className="quantity__button"
-                            onClick={() =>
-                              amount > 1 &&
-                              dispatch(updateOrder({ ref: ref, act: "dec" }))
-                            }
-                          >
-                            -
-                          </button>
-                          <input
-                            type="number"
-                            className="quantity__input-box"
-                            value={amount}
-                            onChange={(e) =>
-                              setValue({ ref: ref, val: e.target.value })
-                            }
-                          ></input>
-                          <button
-                            className="quantity__button"
-                            onClick={() =>
-                              dispatch(updateOrder({ ref: ref, act: "inc" }))
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
-                        <div
-                          className="remove"
-                          onClick={() => dispatch(removeOrder({ ref: ref }))}
-                        ></div>
-                      </div>
-                    ))}
+                      )
+                    )}
                   </div>
                 </div>
                 <div className="order__form">
@@ -236,11 +223,11 @@ export default function Order() {
                     id="id"
                     label="name"
                     defaultValue={countries[0]}
-                    selectedValue={selectedValue}
+                    selectedValue={selectedValue && countries.filter(country => country.id == selectedValue.id)[0]}
                     onChange={(val) => setSelectedValue(val)}
                   />
                 </div>
-                <button className="button" onClick={() => onSubmit()}>
+                <button className="button" onClick={() => validateForm()}>
                   {t("order.b2")}
                 </button>
               </>
