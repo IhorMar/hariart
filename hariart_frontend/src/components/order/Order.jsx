@@ -49,7 +49,6 @@ export default function Order() {
 
   useEffect(() => {
     dispatch(predefineOrder());
-
     return () => dispatch(isTimeout({ timeout: false }));
   }, []);
 
@@ -119,7 +118,7 @@ export default function Order() {
   return (
     <>
       <div className="order">
-        {selected.timeout.timeout ? (
+        {selected.timeout.timeout && !selected.orders.orders.length ? (
           <div className="error-message">{t("order.session-expired")}</div>
         ) : (
           <>
