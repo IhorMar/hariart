@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Navbar from "./components/navbar/Navbar";
@@ -10,6 +10,7 @@ import ScrollToTop from "./components/scroll_to_top/ScrollToTop";
 import PaintingsGroup from "./components/paintings_group/Paintings_group";
 import PaintingDetails from "./components/painting_details/Painting_details";
 import SessionTimeout from "./components/timer/Timer";
+import { predefineOrder } from "./reducers/Orders";
 import { removeAllOrders } from "./reducers/Orders";
 import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
@@ -17,6 +18,8 @@ import "./App.css";
 function App() {
   const selected = useSelector((state) => state.orders);
   const dispatch = useDispatch();
+
+  useEffect(() => { dispatch(predefineOrder()) }, []);
 
   return (
     <Router>

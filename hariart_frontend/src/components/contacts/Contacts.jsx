@@ -2,21 +2,24 @@ import React, { useState } from "react";
 import "./Contacts.css";
 import Footer from "../footer/Footer";
 import { useTranslation } from "react-i18next";
+import ContactUsHelper from "../../services/handlers/ContactUs";
+import { useEffect } from "react";
 
 export default function Contacts() {
+  const [contacts, setContacts] = useState();
   const [name, setName] = useState("");
-  const [nameError, setNameError] = useState(false);
+  const [nameError, setNameError] = useState(true);
   const [phone, setPhone] = useState("");
-  const [phoneError, setPhoneError] = useState(false);
+  const [phoneError, setPhoneError] = useState(true);
   const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
+  const [emailError, setEmailError] = useState(true);
   const [message, setMessage] = useState("");
 
   const { t } = useTranslation();
 
   const validate = () => {
     if (!name) {
-      setNameError(true);
+      setNameError("contacts.required-field");
     } else {
       setNameError(false);
     }
@@ -46,46 +49,36 @@ export default function Contacts() {
     }
   };
 
+  useEffect(() => {
+    if (!emailError && !phoneError && !nameError) {
+      ContactUsHelper.sendContactUs({
+        phone: phone,
+        email: email,
+        name: name,
+        message: message,
+        language: localStorage.getItem("Lanuage"),
+      });
+    }
+  }, [emailError, phoneError, nameError]);
+
+  useEffect(() => {
+    ContactUsHelper.getContacts(setContacts);
+  }, []);
+
   return (
     <>
       <div className="contacts">
         <div className="contacts__title">{t("contacts.t1")}</div>
         <div className="contacts__subtitle">info@hariart.org</div>
         <div className="contacts__info">
-          <p>
-            <strong>Kaushalya devi dasi</strong>
-            <a href="mailto:katrusja.ko@gmail.com"> katrusja.ko@gmail.com </a>
-            +380502164374 (<em>{t("country.ua")}</em>)
-          </p>
-          <p>
-            <strong>Gagattarini devi dasi </strong>
-            <a href="mailto:satila81@gmail.com"> satila81@gmail.com </a>
-            +380672494440 (<em>{t("country.ua")}</em>)
-          </p>
-          <p>
-            <strong>Aleksey Mandryko</strong>
-            <a href="mailto:manallex@gmail.com"> manallex@gmail.com </a>
-            +380931630764 (<em>{t("country.ua")}</em>)
-          </p>
-          <p>
-            <strong>Mukunda Murari </strong>
-            <a href="mailto:mukundamuraridas108@gmail.com">
-              mukundamuraridas108@gmail.com
-            </a>{" "}
-            +37065484649 (<em>{t("country.lt")}</em>)
-          </p>
-          <p>
-            <strong>Eugene Akhmetzyanov</strong>
-            <a href="mailto:das10816@yandex.ru"> das10816@yandex.ru </a>
-            +79655960146 (<em>{t("country.ru")}</em>)
-          </p>
-          <p>
-            <strong>Jurga Saule </strong>
-            <a href="mailto:Jurga.Saule.dasi@outlook.com">
-              Jurga.Saule.dasi@outlook.com
-            </a>{" "}
-            +4796863657 (<em>{t("country.nw")}</em>)
-          </p>
+          {contacts &&
+            contacts.map((contact, i) => (
+              <p key={i}>
+                <strong>{contact.fullname}</strong>
+                <a href={`mailto:${contact.email}`}> {contact.email} </a>
+                {contact.phone} (<em>{t(`${contact.country}`)}</em>)
+              </p>
+            ))}
         </div>
         <div className="contacts__writing">
           <div className="contacts__title">{t("contacts.t2")}</div>
@@ -99,9 +92,9 @@ export default function Contacts() {
                   onChange={(e) => setName(e.target.value)}
                   required={true}
                 />
-                {nameError && (
+                {typeof nameError === "string" && (
                   <label className="personal-info__text--error">
-                    *{t("contacts.required-field")}*
+                    *{t(nameError)}*
                   </label>
                 )}
               </div>
@@ -113,7 +106,7 @@ export default function Contacts() {
                   onChange={(e) => setPhone(e.target.value)}
                   required={true}
                 />
-                {phoneError && (
+                {typeof phoneError === "string" && (
                   <label className="personal-info__text--error">
                     *{t(phoneError)}*
                   </label>
@@ -127,7 +120,7 @@ export default function Contacts() {
                   onChange={(e) => setEmail(e.target.value)}
                   required={true}
                 />
-                {emailError && (
+                {typeof emailError === "string" && (
                   <label className="personal-info__text--error">
                     *{t(emailError)}*
                   </label>
