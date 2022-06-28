@@ -6,20 +6,20 @@ import ContactUsHelper from "../../services/handlers/ContactUs";
 import { useEffect } from "react";
 
 export default function Contacts() {
-  const [contacts, setContacts]= useState();
+  const [contacts, setContacts] = useState();
   const [name, setName] = useState("");
-  const [nameError, setNameError] = useState(false);
+  const [nameError, setNameError] = useState(true);
   const [phone, setPhone] = useState("");
-  const [phoneError, setPhoneError] = useState(false);
+  const [phoneError, setPhoneError] = useState(true);
   const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
+  const [emailError, setEmailError] = useState(true);
   const [message, setMessage] = useState("");
 
   const { t } = useTranslation();
 
   const validate = () => {
     if (!name) {
-      setNameError(true);
+      setNameError("contacts.required-field");
     } else {
       setNameError(false);
     }
@@ -47,22 +47,23 @@ export default function Contacts() {
     } else {
       setEmailError(false);
     }
-    return !(emailError || phoneError || nameError);
   };
 
-  const onSubmit = () => {
-    if (validate()) {
+  useEffect(() => {
+    if (!emailError && !phoneError && !nameError) {
       ContactUsHelper.sendContactUs({
         phone: phone,
         email: email,
         name: name,
         message: message,
-        language: localStorage.getItem("Lanuage")
+        language: localStorage.getItem("Lanuage"),
       });
     }
-  };
+  }, [emailError, phoneError, nameError]);
 
-  useEffect(() => { ContactUsHelper.getContacts(setContacts) }, [])
+  useEffect(() => {
+    ContactUsHelper.getContacts(setContacts);
+  }, []);
 
   return (
     <>
@@ -70,13 +71,14 @@ export default function Contacts() {
         <div className="contacts__title">{t("contacts.t1")}</div>
         <div className="contacts__subtitle">info@hariart.org</div>
         <div className="contacts__info">
-          {contacts && contacts.map((contact, i) => (
-            <p key={i}>
-              <strong>{contact.fullname}</strong>
-              <a href={`mailto:${contact.email}`}> {contact.email} </a>
-               {contact.phone} (<em>{t(`${contact.country}`)}</em>)
-            </p>
-          ))}
+          {contacts &&
+            contacts.map((contact, i) => (
+              <p key={i}>
+                <strong>{contact.fullname}</strong>
+                <a href={`mailto:${contact.email}`}> {contact.email} </a>
+                {contact.phone} (<em>{t(`${contact.country}`)}</em>)
+              </p>
+            ))}
         </div>
         <div className="contacts__writing">
           <div className="contacts__title">{t("contacts.t2")}</div>
@@ -90,9 +92,9 @@ export default function Contacts() {
                   onChange={(e) => setName(e.target.value)}
                   required={true}
                 />
-                {nameError && (
+                {typeof nameError === "string" && (
                   <label className="personal-info__text--error">
-                    *{t("contacts.required-field")}*
+                    *{t(nameError)}*
                   </label>
                 )}
               </div>
@@ -104,7 +106,7 @@ export default function Contacts() {
                   onChange={(e) => setPhone(e.target.value)}
                   required={true}
                 />
-                {phoneError && (
+                {typeof phoneError === "string" && (
                   <label className="personal-info__text--error">
                     *{t(phoneError)}*
                   </label>
@@ -118,7 +120,7 @@ export default function Contacts() {
                   onChange={(e) => setEmail(e.target.value)}
                   required={true}
                 />
-                {emailError && (
+                {typeof emailError === "string" && (
                   <label className="personal-info__text--error">
                     *{t(emailError)}*
                   </label>
@@ -135,7 +137,7 @@ export default function Contacts() {
             <button
               className="submit-form"
               type="submit"
-              onClick={() => onSubmit()}
+              onClick={() => validate()}
             >
               {t("contacts.send")}
             </button>
