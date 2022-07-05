@@ -56,8 +56,7 @@ class OrderViewSet(viewsets.ModelViewSet):
             recipients = list(map(lambda contact_email: contact_email['email'], contact_emails))
 
             try:
-                send_email_on_new_order.delay(subject, message, sender,
-                          ['metallistvalon@gmail.com'])
+                send_email_on_new_order.delay(subject, message, sender, recipients)
             except BadHeaderError:
                 return HttpResponse('Invalid header in send email found')
 
@@ -85,7 +84,7 @@ def contact_us(request):
         recipients = list(map(lambda contact_email: contact_email['email'], contact_emails))
 
         try:
-            send_email_contact_us(subject, message, sender, recipients)
+            send_email_contact_us.delay(subject, message, sender, recipients)
         except BadHeaderError:
             return HttpResponse('Invalid header in send email found')
 
