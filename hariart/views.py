@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from .models import Painting, PaintingSize, PaintingOrder, Order, Contact, COUNTRY_CHOICES
 from .serializers import PaintingSerializer, PaintingSizeSerializer, OrderSerializer, PaintingOrderSerializer, ContactSerializer
-
+from .tasks import send_email_on_new_order, send_email_contact_us
 
 class PaintingViewSet(viewsets.ModelViewSet):
     serializer_class = PaintingSerializer
@@ -56,8 +56,8 @@ class OrderViewSet(viewsets.ModelViewSet):
             recipients = list(map(lambda contact_email: contact_email['email'], contact_emails))
 
             try:
-                send_mail(subject, message, sender,
-                          recipients, fail_silently=True)
+                send_email_on_new_order.delay(subject, message, sender,
+                          ['metallistvalon@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header in send email found')
 
@@ -85,8 +85,7 @@ def contact_us(request):
         recipients = list(map(lambda contact_email: contact_email['email'], contact_emails))
 
         try:
-            send_mail(subject, message, sender,
-                          recipients, fail_silently=True)
+            send_email_contact_us(subject, message, sender, recipients)
         except BadHeaderError:
             return HttpResponse('Invalid header in send email found')
 
