@@ -3,10 +3,13 @@ services:
   database:
     image: postgres:12.7
     environment:
-      POSTGRES_DB: db_name
-      POSTGRES_USER: db_user_name
-      POSTGRES_PASSWORD: db_user_password
-
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
   app:
     build: .
     command: >
@@ -19,11 +22,13 @@ services:
     volumes:
       - .:/app
     environment:
-      - SECRET_KEY=secret_key
+      - SECRET_KEY=${SECRET_KEY}
       - DEBUG=1
-      - DB_HOST=database
-      - DB_NAME=db_name
-      - DB_USER=db_user_name
-      - DB_PASS=db_user_password
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
     depends_on:
       - database
+volumes:
+  pgdata:

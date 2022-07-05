@@ -10,7 +10,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') or 'django-insecure-ael0-!v6mq$p1e$b0v
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0"]
 ALLOWED_HOSTS.extend(
     filter(
         None,
