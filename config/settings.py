@@ -142,3 +142,6 @@ CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:8000']
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 SENDGRID_API_KEY = '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' #here your send grid api key
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_BROKER', "redis://redis:6379/0")
