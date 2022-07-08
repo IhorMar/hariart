@@ -8,3 +8,5 @@ djangorestframework==3.13.1
 django-filter==21.1
 django-phonenumber-field[phonenumbers]
 django-sendgrid-v5
+requests~=2.28.1
+beautifulsoup4~=4.11.1
