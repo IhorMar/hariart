@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.core.mail import BadHeaderError
 from django.http import HttpResponse
 from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import (
     Painting,
@@ -81,12 +83,19 @@ class OrderViewSet(viewsets.ModelViewSet):
             try:
                 send_email_on_new_order.delay(subject, message, sender, recipients)
             except BadHeaderError:
-                return HttpResponse("Invalid header in send email found")
+                return Response(
+                    "Invalid header in send email found",
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
 
-        except:
-            return HttpResponse("Invalid header found")
-
-        return HttpResponse("Success...Your email has been sent")
+        except KeyError:
+            return Response(
+                data="Submitted data is not valid, try again",
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        return Response(
+            data="Success...Your email has been sent", status=status.HTTP_200_OK
+        )
 
 
 class PaintingOrderViewSet(viewsets.ModelViewSet):
