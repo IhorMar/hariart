@@ -75,4 +75,7 @@ if __name__ == '__main__':
         url = next_url
 
     if urls != get_urls():
+        print('\nSaved new links!')
         write_urls(urls)
+    else:
+        print('\nNo changes were found!')

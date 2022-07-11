@@ -1,8 +1,9 @@
-from bs4 import BeautifulSoup
-import requests
 import sys
-import pickle
-from typing import List
+
+import requests
+from bs4 import BeautifulSoup
+import urllib.request
+
 from crawler import get_urls, extract_filename_from_url
 
 
@@ -14,9 +15,9 @@ class Image:
         self.headline = headline
         self.artists = artists
 
-    def write_to_file(self):
+    def save(self):
+        urllib.request.urlretrieve(self.url, f"Images Info/{self.filename}")
         image_info_str = ''
-        image_info_str += f'URL: {self.url}\n'
         image_info_str += f'Caption: {self.caption}\n'
         image_info_str += f'Headline: {self.headline}\n'
         image_info_str += f'Artists: {self.artists}'
@@ -40,5 +41,5 @@ if __name__ == '__main__':
             if font.text == 'Artists':
                 artists = fonts[i + 1].text
 
-        Image(extract_filename_from_url(url), caption, headline, artists).write_to_file()
-        sys.stdout.write(f'\r{idx + 1} of {len(urls)} URLs processed')
+        Image(extract_filename_from_url(url), caption, headline, artists).save()
+        sys.stdout.write(f'\r{idx + 1} of {len(urls)} URLs were processed')
