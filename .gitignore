@@ -272,3 +272,4 @@ yarn-error.log*
 htmlcov
 hariart/migrations
 hariart_frontend/static/frontend/**
+parsing/Images Info
