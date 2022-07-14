@@ -1,14 +1,16 @@
-from pathlib import Path
-import os
 import mimetypes
+import os
+from pathlib import Path
+
+from celery.schedules import crontab
 
 mimetypes.add_type("text/javascript", ".js", True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = (
-    os.environ.get("SECRET_KEY")
-    or "django-insecure-ael0-!v6mq$p1e$b0vsb3l!askb8!@hevl-p_rpjsxb1ur)+5r"
+        os.environ.get("SECRET_KEY")
+        or "django-insecure-ael0-!v6mq$p1e$b0vsb3l!askb8!@hevl-p_rpjsxb1ur)+5r"
 )
 
 DEBUG = True
@@ -64,7 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -98,7 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -109,7 +109,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -146,3 +145,11 @@ SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+
+CELERY_BEAT_SCHEDULE = {
+    'parse_every_day': {
+        'task': 'hariart.tasks.parse',
+        'schedule': crontab(minute=0, hour=3),
+        'args': (),
+    },
+}
