@@ -4,6 +4,8 @@ from typing import List
 import requests
 from bs4 import BeautifulSoup
 
+import scraper
+
 
 def write_urls(urls_list: List[str]) -> None:
     """
@@ -28,7 +30,10 @@ def main():
             break
         links += links_in_page
         url_end += 20
-    write_urls(links)
+
+    if links != scraper.get_urls():
+        write_urls(links)
+        scraper.main()
 
 
 if __name__ == '__main__':
