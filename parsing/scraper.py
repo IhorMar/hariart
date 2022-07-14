@@ -1,6 +1,7 @@
+import base64
+import json
 import pickle
 import re
-import urllib.request
 from typing import List
 
 import requests
@@ -28,26 +29,38 @@ def get_urls() -> List[str]:
         return pickle.load(f)
 
 
+def get_as_base64(url) -> str:
+    """
+    Convert image url to base64 format
+    @param url: image url
+    @return: encoded image
+    """
+    return base64.b64encode(requests.get(url).content).decode('utf-8')
+
+
 class Image:
     def __init__(self, filename, caption, headline, artists):
         self.filename = filename
-        self.url = 'http://files.krishna.com/ImageFolio42_files/gallery-images/Krishna_Conscious_Paintings/' + filename
+        url = 'http://files.krishna.com/ImageFolio42_files/gallery-images/Krishna_Conscious_Paintings/' + filename
+        self.base64_format = get_as_base64(url)
         self.caption = caption
         self.headline = headline
         self.artists = artists
 
-    def save(self):
-        urllib.request.urlretrieve(self.url, f"Images Info/{self.filename}")
-        image_info_str = ''
-        image_info_str += f'Caption: {self.caption}\n'
-        image_info_str += f'Headline: {self.headline}\n'
-        image_info_str += f'Artists: {self.artists}'
-        with open(f'Images Info/{self.filename[:-4]}.txt', 'w', encoding="utf-8") as f:
-            f.write(image_info_str)
+
+def save_list_of_objects_to_json(list_of_objects: List[Image]) -> None:
+    """
+    Save list of Image objects to json file
+    @param list_of_objects: list of Image objects
+    @return: None
+    """
+    with open('data.json', 'w') as f:
+        json.dump([ob.__dict__ for ob in list_of_objects], f)
 
 
 def main():
     urls = get_urls()
+    images = list()
     for url in urls:
         page = requests.get(url)
         bs = BeautifulSoup(page.text, 'html.parser')
@@ -62,7 +75,8 @@ def main():
                     headline = fonts[i + 1].text
                 if font.text == 'Artists':
                     artists = fonts[i + 1].text
-            Image(extract_filename_from_url(url), caption, headline, artists).save()
+            images.append(Image(extract_filename_from_url(url), caption, headline, artists))
+    save_list_of_objects_to_json(images)
 
 
 if __name__ == '__main__':
