@@ -1,5 +1,5 @@
 from __future__ import absolute_import, unicode_literals
-from celery import shared_task
+from celery.schedules import crontab
 from django.core.mail import send_mail
 
 import parsing.crawler
@@ -21,6 +21,15 @@ def send_email_contact_us(subject, message, sender, recipients):
     return send_mail(subject, message, sender, recipients, fail_silently=False)
 
 
-@shared_task()
+@app.task(name='start_crawler')
 def parse():
     parsing.crawler.main()
+
+
+app.conf.beat_schedule = {
+    'start-crawler': {
+        'task': 'start_crawler',
+        'schedule': crontab(minute=0, hour=3),
+        'args': (),
+    },
+}

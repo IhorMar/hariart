@@ -2,8 +2,6 @@ import mimetypes
 import os
 from pathlib import Path
 
-from celery.schedules import crontab
-
 mimetypes.add_type("text/javascript", ".js", True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -143,13 +141,5 @@ EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = "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"  # here your send grid api key
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
-
-CELERY_BEAT_SCHEDULE = {
-    'parse_every_day': {
-        'task': 'hariart.tasks.parse',
-        'schedule': crontab(minute=0, hour=3),
-        'args': (),
-    },
-}
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379//0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379//0")
