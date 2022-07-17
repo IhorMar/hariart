@@ -4,7 +4,7 @@ from typing import List
 import requests
 from bs4 import BeautifulSoup
 
-import scraper
+import parsing.scraper
 
 
 def write_urls(urls_list: List[str]) -> None:
@@ -13,7 +13,7 @@ def write_urls(urls_list: List[str]) -> None:
     @param urls_list: list with valid urls
     @return: None
     """
-    with open('urls.pickle', 'wb') as f:
+    with open('parsing/urls.pickle', 'wb') as f:
         pickle.dump(urls_list, f)
 
 
@@ -31,9 +31,9 @@ def main():
         links += links_in_page
         url_end += 20
 
-    if links != scraper.get_urls():
+    if links != parsing.scraper.get_urls():
         write_urls(links)
-        scraper.main()
+        parsing.scraper.main()
 
 
 if __name__ == '__main__':

@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def extract_filename_from_url(url: str) -> str | None:
+def extract_filename_from_url(url: str):
     """
     Extract filename from url
     @param url: url where filename must be extracted from
@@ -25,7 +25,7 @@ def get_urls() -> List[str]:
     Get urls from urls.pickle file
     @return: list of urls
     """
-    with open('urls.pickle', 'rb') as f:
+    with open('parsing/urls.pickle', 'rb') as f:
         return pickle.load(f)
 
 
@@ -54,7 +54,7 @@ def save_list_of_objects_to_json(list_of_objects: List[Image]) -> None:
     @param list_of_objects: list of Image objects
     @return: None
     """
-    with open('data.json', 'w') as f:
+    with open('parsing/data.json', 'w') as f:
         json.dump([ob.__dict__ for ob in list_of_objects], f)
 
 
