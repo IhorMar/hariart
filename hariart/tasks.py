@@ -23,6 +23,7 @@ def send_email_contact_us(subject, message, sender, recipients):
 
 @app.task(name='start_crawler')
 def parse():
+    logger.info("Parsing script was run")
     parsing.crawler.main()
 
 
