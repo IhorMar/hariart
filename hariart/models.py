@@ -87,3 +87,15 @@ class PageNumberPaginationWithCount(pagination.PageNumberPagination):
         response.data['total_pages'] = self.page.paginator.num_pages
         response.data['current_page'] = self.page.number
         return response
+
+
+class Parsing(models.Model):
+    file_name = models.CharField(max_length=100)
+    base64_format = models.TextField()
+    caption = models.CharField(max_length=500)
+    headline = models.CharField(max_length=300)
+    artists = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Parsing"
+        verbose_name_plural = "Parsing"
