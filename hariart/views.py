@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.core.mail import BadHeaderError
 from django.http import HttpResponse
 from rest_framework import viewsets
