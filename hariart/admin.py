@@ -3,11 +3,13 @@ from django.http import HttpResponseRedirect
 
 from .models import Painting, PaintingSize, PaintingOrder, Order, Contact, Parsing
 from django.urls import path
+from .tasks import parse
 from parsing.crawler import main
 
 
 def start_parsing(request):
-    main()
+    # main()
+    parse()
     return HttpResponseRedirect("../")
 
 

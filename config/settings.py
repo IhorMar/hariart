@@ -13,7 +13,7 @@ SECRET_KEY = (
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0"]
+ALLOWED_HOSTS = ["0.0.0.0","127.0.0.1"]
 ALLOWED_HOSTS.extend(
     filter(
         None,
@@ -78,7 +78,16 @@ DATABASES = {
     }
 }
 
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': '127.0.0.1',
+        'NAME': 'art_db',
+        'USER': 'art_user',
+        'PASSWORD': 'art_123',
+        'PORT': '5432',
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -141,5 +150,7 @@ EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = "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"  # here your send grid api key
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379//0")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379//0")
+# CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379//0")
+# CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379//0")
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://127.0.0.1:6379//0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://127.0.0.1:6379//0")

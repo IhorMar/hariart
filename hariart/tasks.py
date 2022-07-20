@@ -23,14 +23,15 @@ def send_email_contact_us(subject, message, sender, recipients):
 
 @app.task(name='start_crawler')
 def parse():
-    logger.info("Parsing script was run")
     parsing.crawler.main()
+    logger.info("Parsing script was run")
 
 
 app.conf.beat_schedule = {
     'start-crawler': {
         'task': 'start_crawler',
-        'schedule': crontab(minute=0, hour=3),
+        # 'schedule': crontab(minute=0, hour=3),
+        'schedule': 20,
         'args': (),
     },
 }

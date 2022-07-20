@@ -4,7 +4,8 @@ from typing import List
 import requests
 from bs4 import BeautifulSoup
 
-from . import scraper
+from parsing import scraper
+
 
 
 def write_urls(urls_list: List[str]) -> None:
@@ -18,6 +19,7 @@ def write_urls(urls_list: List[str]) -> None:
 
 
 def main():
+    print("crawler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     url_start = 'http://files.krishna.com/cgi-bin/ImageFolio42/imageFolio.cgi?direct=Krishna_Conscious_Paintings&img='
     url_end = 0
     links = list()
